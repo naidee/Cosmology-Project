@@ -1,0 +1,21 @@
+site_name: UQ PHYS3080/7080 Cosmology Project
+nav:
+    - Home: index.md
+    - 'Code to get you started':
+      - Basic cosmology: notebooks/CosmoIntro.ipynb
+
+theme:
+  name: "material"
+repo_url: https://github.com/AstroUQ/PHYS3080_2022/cosmo
+plugins:
+  - search
+  - mkdocs-jupyter
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          selection:
+            docstring_style: "numpy"
+          rendering:
+            show_source: false
+      custom_templates: templates
