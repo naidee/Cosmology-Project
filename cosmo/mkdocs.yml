@@ -2,7 +2,9 @@ site_name: UQ PHYS3080/7080 Cosmology Project
 nav:
     - Home: index.md
     - Instructions (download): CosmologyProject_2022.pdf
-    - 'Code to get you started':
+    - Theory (download): TheoryCosmo.pdf
+    #- Statistics (download): StatisticsNotes.pdf
+    - Code to get you started:
       - Basic cosmology: notebooks/CosmoIntro.ipynb
 
 theme:
