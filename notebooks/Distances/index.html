@@ -358,6 +358,26 @@
     1.4 Luminosity distance and Angular diameter distance
   </a>
   
+    <nav class="md-nav" aria-label="1.4 Luminosity distance and Angular diameter distance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hint-how-to-calculate-s_kchi" class="md-nav__link">
+    Hint!  How to calculate $S_k(\chi)$
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculate-d_lz-and-d_az" class="md-nav__link">
+    Calculate $D_L(z)$ and $D_A(z)$
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
       </ul>
@@ -439,6 +459,26 @@
   <a href="#14-luminosity-distance-and-angular-diameter-distance" class="md-nav__link">
     1.4 Luminosity distance and Angular diameter distance
   </a>
+  
+    <nav class="md-nav" aria-label="1.4 Luminosity distance and Angular diameter distance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#hint-how-to-calculate-s_kchi" class="md-nav__link">
+    Hint!  How to calculate $S_k(\chi)$
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculate-d_lz-and-d_az" class="md-nav__link">
+    Calculate $D_L(z)$ and $D_A(z)$
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
         
@@ -1521,8 +1561,9 @@ Licensed under the Apache License, Version 2.0.
 \begin{equation} R_0\chi = c\int \frac{dt}{a} = c\int \frac{dt}{da} \frac{da}{a} = c\int \frac{da}{\dot{a}a} \end{equation}<p>Differentiating $a$ with respect to $z$ gives $da = -(1+z)^{-2} dz$, and putting all of that together gives the equation for comoving distance as a function of redshift,</p>
 \begin{eqnarray} R_0\chi &amp;=&amp; c\int_0^z \frac{dz}{H(z)}, \\
                          &amp;=&amp; \frac{c}{H_0}\int_0^z \frac{dz}{E(z)}, \end{eqnarray}<p>where $E(z)\equiv H(z)/H_0$.  Written out longhand that is 
-\begin{equation} E(z)= \left(\Omega_R (1+z)^4+\Omega_M (1+z)^3+\Omega_K (1+z)^2+\Omega_\Lambda\right)^{1/2}.\end{equation}<br>
-(Or some more complex model!)</p>
+\begin{equation} E(z)= \left(\Omega_M (1+z)^3+\Omega_K (1+z)^2+\Omega_\Lambda\right)^{1/2}.\end{equation}<br>
+(Or some more complex model!) 
+Usually we set $\Omega_R=0$ otherwise there would also be a $\Omega_R (1+z)^4$ term (the actual radiation density is about $\Omega_R\sim5\times 10^{-5}$), but IMPORTANT! you <em>cannot</em> set $\Omega_K=0$ in general, because it is only zero if all the other densities add up to 1.</p>
 
 </div>
 </div>
@@ -1533,7 +1574,7 @@ Licensed under the Apache License, Version 2.0.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1557,8 +1598,8 @@ Licensed under the Apache License, Version 2.0.
 <span class="n">c</span> <span class="o">=</span> <span class="mf">299792.458</span> <span class="c1"># km/s (speed of light)</span>
 
 <span class="n">H0kmsmpc</span> <span class="o">=</span> <span class="mf">70.</span>  <span class="c1"># Hubble constant in km/s/Mpc</span>
-<span class="n">H0s</span> <span class="o">=</span> <span class="n">H0kmsmpc</span> <span class="o">*</span> <span class="mf">3.2408e-20</span> <span class="c1"># H0 in inverse seconds is H0 in km/s/Mpc * (3.2408e-20 Mpc/km)</span>
-<span class="n">H0y</span> <span class="o">=</span> <span class="n">H0s</span> <span class="o">*</span> <span class="mf">3.154e7</span> <span class="o">*</span> <span class="mf">1.e9</span> <span class="c1"># H0 in inverse Giga years is H0 in inverse seconds * (3.154e7 seconds/year) * (1e9 years / Giga year)</span>
+<span class="n">cH0mpc</span> <span class="o">=</span> <span class="n">c</span><span class="o">/</span><span class="n">H0kmsmpc</span>   <span class="c1"># c/H0 in Mpc  (the km/s cancel out in the numerator and denominator)</span>
+<span class="n">cH0Glyr</span> <span class="o">=</span> <span class="n">cH0mpc</span> <span class="o">*</span> <span class="mf">3.262</span> <span class="o">/</span> <span class="mi">1000</span> <span class="c1">#c/H0 in billions of light years.  There are 3.262 light year / parsec</span>
 </pre></div>
 <div id="cell-1" class="clipboard-copy-txt"># First let's set up our packages
 import numpy as np
@@ -1569,8 +1610,8 @@ from scipy import integrate
 c = 299792.458 # km/s (speed of light)
 
 H0kmsmpc = 70.  # Hubble constant in km/s/Mpc
-H0s = H0kmsmpc * 3.2408e-20 # H0 in inverse seconds is H0 in km/s/Mpc * (3.2408e-20 Mpc/km)
-H0y = H0s * 3.154e7 * 1.e9 # H0 in inverse Giga years is H0 in inverse seconds * (3.154e7 seconds/year) * (1e9 years / Giga year)</div>
+cH0mpc = c/H0kmsmpc   # c/H0 in Mpc  (the km/s cancel out in the numerator and denominator)
+cH0Glyr = cH0mpc * 3.262 / 1000 #c/H0 in billions of light years.  There are 3.262 light year / parsec</div>
     
         </div>
     </div>
@@ -1597,7 +1638,7 @@ H0y = H0s * 3.154e7 * 1.e9 # H0 in inverse Giga years is H0 in inverse seconds *
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1613,36 +1654,44 @@ H0y = H0s * 3.154e7 * 1.e9 # H0 in inverse Giga years is H0 in inverse seconds *
             </clipboard-copy>
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Write a function for the integrand, i.e. $1/E(z)$,</span>
-<span class="k">def</span> <span class="nf">Ez</span><span class="p">(</span><span class="n">z</span><span class="p">):</span>
-    <span class="n">Ez</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="c1"># Put your code here!  This is not right until you change it.</span>
+<span class="k">def</span> <span class="nf">Ez</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">om</span><span class="p">,</span> <span class="n">ol</span><span class="p">):</span>
+    <span class="n">ok</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">om</span><span class="o">-</span><span class="n">ol</span>
+    <span class="n">Ez</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span> <span class="c1"># Put your code here!  This is not right until you change it.</span>
     <span class="k">return</span> <span class="n">Ez</span>
 
 <span class="c1"># Choose the redshift (e.g. z=0.3)</span>
 <span class="n">z</span><span class="o">=</span><span class="mf">0.3</span>
 
-<span class="c1"># Calcuate the integral:</span>
-<span class="n">xx</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">Ez</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">z</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> 
+<span class="c1"># Choose a cosmology</span>
+<span class="n">om</span><span class="p">,</span> <span class="n">ol</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span>
+
+<span class="c1"># Calcuate the integral (just the int_0^z(dz/E(z)) part, which givers xx=R0*X/(c/H_0)):</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">Ez</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">om</span><span class="p">,</span><span class="n">ol</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> 
 
 <span class="c1"># Sub in the required constants to get the comoving distance R_0*X</span>
-<span class="n">R0X</span> <span class="o">=</span> <span class="n">c</span><span class="o">*</span><span class="n">xx</span><span class="o">/</span><span class="n">H0y</span> <span class="c1"># Age in Gyr</span>
+<span class="n">R0X</span> <span class="o">=</span> <span class="n">xx</span><span class="o">*</span><span class="n">cH0Glyr</span> <span class="c1"># Distance in Glyr</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Comoving distance to a galaxy at z=</span><span class="si">%.3f</span><span class="s1"> is </span><span class="si">%.2f</span><span class="s1"> Glyr&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">R0X</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Comoving distance to a galaxy at z=</span><span class="si">%.3f</span><span class="s1"> is </span><span class="si">%.2f</span><span class="s1"> Glyr (this is not right until you have put the correct equation for Ez above)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">R0X</span><span class="p">))</span>
 </pre></div>
 <div id="cell-2" class="clipboard-copy-txt"># Write a function for the integrand, i.e. $1/E(z)$,
-def Ez(z):
-    Ez = np.sqrt(1.0) # Put your code here!  This is not right until you change it.
+def Ez(z, om, ol):
+    ok = 1.0-om-ol
+    Ez = np.sqrt(0.0) # Put your code here!  This is not right until you change it.
     return Ez
 
 # Choose the redshift (e.g. z=0.3)
 z=0.3
 
-# Calcuate the integral:
-xx = integrate.quad(Ez,0,z)[0] 
+# Choose a cosmology
+om, ol = 0.3, 0.7
+
+# Calcuate the integral (just the int_0^z(dz/E(z)) part, which givers xx=R0*X/(c/H_0)):
+xx = integrate.quad(Ez,0,z,args=(om,ol))[0] 
 
 # Sub in the required constants to get the comoving distance R_0*X
-R0X = c*xx/H0y # Age in Gyr
+R0X = xx*cH0Glyr # Distance in Glyr
 
-print('Comoving distance to a galaxy at z=%.3f is %.2f Glyr'%(z,R0X))</div>
+print('Comoving distance to a galaxy at z=%.3f is %.2f Glyr (this is not right until you have put the correct equation for Ez above)'%(z,R0X))</div>
     
         </div>
     </div>
@@ -1664,7 +1713,7 @@ print('Comoving distance to a galaxy at z=%.3f is %.2f Glyr'%(z,R0X))</div>
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Comoving distance to a galaxy at z=0.300 is 1256984.72 Glyr
+<pre>Comoving distance to a galaxy at z=0.300 is 0.00 Glyr (this is not right until you have put the correct equation for Ez above)
 </pre>
 </div>
 </div>
@@ -1760,7 +1809,7 @@ distance_at_emission = 'your code here'
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[31]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1779,25 +1828,41 @@ distance_at_emission = 'your code here'
 <span class="n">zstart</span> <span class="o">=</span> <span class="mf">0.0</span>
 <span class="n">zstop</span> <span class="o">=</span> <span class="mf">4.1</span>
 <span class="n">zstep</span> <span class="o">=</span> <span class="mf">0.1</span> <span class="c1"># Make this finer to make the plot smoother</span>
-<span class="n">z_arr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">zstart</span><span class="p">,</span><span class="n">zstop</span><span class="p">,</span><span class="n">zstep</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;z_arr=&#39;</span><span class="p">,</span><span class="n">z_arr</span><span class="p">)</span>
+<span class="n">zarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">zstart</span><span class="p">,</span><span class="n">zstop</span><span class="p">,</span><span class="n">zstep</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;zarr=&#39;</span><span class="p">,</span><span class="n">zarr</span><span class="p">)</span>
 
 <span class="c1"># Now add your code to calculate distance vs redshift and then plot it.  </span>
-<span class="c1"># Copy what was done in the scalefactor vs time plots from the previous workbook, and adapt it to your need here.</span>
+<span class="n">xarr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">zarr</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">z</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">zarr</span><span class="p">):</span>
+    <span class="n">xarr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="c1">#&#39;Your code here&#39;</span>
+    
+<span class="c1"># Sub in the required constants to get the comoving distance R_0*X</span>
+<span class="c1">#R0X = xarr*cH0Glyr # Distance in Glyr</span>
+
+<span class="c1">#plt.plot(zarr,R0X)</span>
+<span class="c1">#plt.xlabel(&#39;redshift&#39;)</span>
+<span class="c1">#plt.ylabel(&#39;$R_0\chi$ (Glyr)&#39;)</span>
+<span class="c1">#plt.show()</span>
 </pre></div>
 <div id="cell-4" class="clipboard-copy-txt"># Start by making an array of redshifts
 zstart = 0.0
 zstop = 4.1
 zstep = 0.1 # Make this finer to make the plot smoother
-z_arr = np.arange(zstart,zstop,zstep)
-print('z_arr=',z_arr)
+zarr = np.arange(zstart,zstop,zstep)
+print('zarr=',zarr)
 
 # Now add your code to calculate distance vs redshift and then plot it.  
-# Copy what was done in the scalefactor vs time plots from the previous workbook, and adapt it to your need here.
+xarr = np.zeros(len(zarr))
+for i, z in enumerate(zarr):
+    xarr[i] = 0.0 #'Your code here'
+    
+# Sub in the required constants to get the comoving distance R_0*X
+#R0X = xarr*cH0Glyr # Distance in Glyr
 
-
-
-
+#plt.plot(zarr,R0X)
+#plt.xlabel('redshift')
+#plt.ylabel('$R_0\chi$ (Glyr)')
+#plt.show()
 </div>
     
         </div>
@@ -1820,7 +1885,7 @@ print('z_arr=',z_arr)
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>z_arr= [0.  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.  1.1 1.2 1.3 1.4 1.5 1.6 1.7
+<pre>zarr= [0.  0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9 1.  1.1 1.2 1.3 1.4 1.5 1.6 1.7
  1.8 1.9 2.  2.1 2.2 2.3 2.4 2.5 2.6 2.7 2.8 2.9 3.  3.1 3.2 3.3 3.4 3.5
  3.6 3.7 3.8 3.9 4. ]
 </pre>
@@ -1839,7 +1904,26 @@ print('z_arr=',z_arr)
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="14-luminosity-distance-and-angular-diameter-distance">1.4 Luminosity distance and Angular diameter distance<a class="anchor-link" href="#14-luminosity-distance-and-angular-diameter-distance">&#182;</a></h3><p>Now plot luminosity distance and angular diameter distance as a function of redshift.</p>
+<h3 id="14-luminosity-distance-and-angular-diameter-distance">1.4 Luminosity distance and Angular diameter distance<a class="anchor-link" href="#14-luminosity-distance-and-angular-diameter-distance">&#182;</a></h3><p>Luminosity distance ($D_L$) and angular diameter distance ($D_A$) are given by,
+\begin{equation} D_L = R S_k(\chi) (1+z) \end{equation}
+\begin{equation} D_A = R S_k(\chi) / (1+z) \end{equation}</p>
+<p>Where $S_k(\chi) = \sin(\chi),\chi,\sinh(\chi)$ for positive, flat, and negative curvatures respectively, i.e. for $\Omega_K&lt;0$, $\Omega_K=0$, and $\Omega_K&gt;0$ respectively.<br>
+(Yes, $\Omega_K&lt;0$ is positive curvature!)</p>
+
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="hint-how-to-calculate-s_kchi">Hint!  How to calculate $S_k(\chi)$<a class="anchor-link" href="#hint-how-to-calculate-s_kchi">&#182;</a></h4><p>Note that if you've kept the constants out of your definition of Ez then, xx $\equiv R_0\chi/(c/H_0)$.  It is handy to know that,
+\begin{equation}  \frac{c}{R_0H_0}=\sqrt{|\Omega_K|}\end{equation}
+so to just get $\chi$ you can use xx multiplied by $\sqrt{|\Omega_K|}$.<br>
+Then to get $R_0 S_k(\chi)/(c/H_0)$ divide the whole thing by $\sqrt{|\Omega_K|}$.</p>
 
 </div>
 </div>
@@ -1850,7 +1934,7 @@ print('z_arr=',z_arr)
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[32]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1865,9 +1949,99 @@ print('z_arr=',z_arr)
                 </div>
             </clipboard-copy>
         </div>
-            <div class="highlight-ipynb hl-python"><pre><span></span>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># You may find this function useful to calculate the perpendicular comoving distance R0*Sk(X)</span>
+    <span class="c1"># Corrects the comoving distance, xx, for curvature, ok.</span>
+    <span class="c1"># Result is perpendicular comoving distance / (c/H0)  </span>
+    <span class="c1"># i.e. it&#39;s the distance to use in angular diameter and luminosity distance</span>
+<span class="k">def</span> <span class="nf">Sk</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">ok</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">ok</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="n">dk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">ok</span><span class="p">)</span><span class="o">*</span><span class="n">xx</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">ok</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">ok</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+        <span class="n">dk</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sinh</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ok</span><span class="p">)</span><span class="o">*</span><span class="n">xx</span><span class="p">)</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">ok</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">dk</span> <span class="o">=</span> <span class="n">xx</span>
+    <span class="k">return</span> <span class="n">dk</span>
+<span class="c1"># This returns a value for R_0S_k(\chi) that you multiply by c/H_0 to give it units.</span>
 </pre></div>
-<div id="cell-5" class="clipboard-copy-txt"></div>
+<div id="cell-5" class="clipboard-copy-txt"># You may find this function useful to calculate the perpendicular comoving distance R0*Sk(X)
+    # Corrects the comoving distance, xx, for curvature, ok.
+    # Result is perpendicular comoving distance / (c/H0)  
+    # i.e. it's the distance to use in angular diameter and luminosity distance
+def Sk(xx, ok):
+    if ok < 0.0:
+        dk = np.sin(np.sqrt(-ok)*xx)/np.sqrt(-ok)
+    elif ok > 0.0:
+        dk = np.sinh(np.sqrt(ok)*xx)/np.sqrt(ok)
+    else:
+        dk = xx
+    return dk
+# This returns a value for R_0S_k(\chi) that you multiply by c/H_0 to give it units.</div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h4 id="calculate-d_lz-and-d_az">Calculate $D_L(z)$ and $D_A(z)$<a class="anchor-link" href="#calculate-d_lz-and-d_az">&#182;</a></h4><p>Plot the present day values ($R=R_0$) of luminosity distance and angular diameter distance as a function of redshift. Do you notice anything interesting about the angular diameter distance at high-redshift?</p>
+
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[34]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-6">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">ok</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">om</span><span class="o">-</span><span class="n">ol</span>
+<span class="n">DD</span> <span class="o">=</span> <span class="n">R0X</span>                          <span class="c1"># Proper distance</span>
+<span class="n">DL</span> <span class="o">=</span> <span class="n">Sk</span><span class="p">(</span><span class="n">xarr</span><span class="p">,</span><span class="n">ok</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">zarr</span><span class="p">)</span><span class="o">*</span><span class="n">cH0Glyr</span> <span class="c1"># Luminosity distance</span>
+<span class="n">DA</span> <span class="o">=</span> <span class="s1">&#39;Your code here&#39;</span>             <span class="c1"># Angular diameter distance</span>
+
+<span class="c1">#plt.plot(zarr,DD,label=&#39;Proper Distance&#39;)</span>
+<span class="c1">#plt.plot(zarr,DL,label=&#39;Luminosity Distance&#39;)</span>
+<span class="c1">##plt.plot(zarr,DA,label=&#39;Angular Diameter Distance&#39;)</span>
+<span class="c1">#plt.legend()</span>
+<span class="c1">#plt.xlabel(&#39;redshift&#39;)</span>
+<span class="c1">#plt.ylabel(&#39;$Distances$ (Glyr)&#39;)</span>
+<span class="c1">#plt.show()</span>
+</pre></div>
+<div id="cell-6" class="clipboard-copy-txt">ok = 1.0-om-ol
+DD = R0X                          # Proper distance
+DL = Sk(xarr,ok)*(1+zarr)*cH0Glyr # Luminosity distance
+DA = 'Your code here'             # Angular diameter distance
+
+#plt.plot(zarr,DD,label='Proper Distance')
+#plt.plot(zarr,DL,label='Luminosity Distance')
+##plt.plot(zarr,DA,label='Angular Diameter Distance')
+#plt.legend()
+#plt.xlabel('redshift')
+#plt.ylabel('$Distances$ (Glyr)')
+#plt.show()</div>
     
         </div>
     </div>
