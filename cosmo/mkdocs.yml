@@ -6,6 +6,7 @@ nav:
     #- Statistics (download): StatisticsNotes.pdf
     - Code to get you started:
       - Basic cosmology: notebooks/CosmoIntro.ipynb
+      - Calculating distances: notebooks/Distances.ipynb
 
 theme:
   name: "material"
