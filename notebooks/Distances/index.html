@@ -1654,10 +1654,10 @@ cH0Glyr = cH0mpc * 3.262 / 1000 #c/H0 in billions of light years.  There are 3.2
             </clipboard-copy>
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Write a function for the integrand, i.e. $1/E(z)$,</span>
-<span class="k">def</span> <span class="nf">Ez</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">om</span><span class="p">,</span> <span class="n">ol</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">Ezinv</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">om</span><span class="p">,</span> <span class="n">ol</span><span class="p">):</span>
     <span class="n">ok</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">om</span><span class="o">-</span><span class="n">ol</span>
     <span class="n">Ez</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span> <span class="c1"># Put your code here!  This is not right until you change it.</span>
-    <span class="k">return</span> <span class="n">Ez</span>
+    <span class="k">return</span> <span class="mf">1.0</span><span class="o">/</span><span class="n">Ez</span>
 
 <span class="c1"># Choose the redshift (e.g. z=0.3)</span>
 <span class="n">z</span><span class="o">=</span><span class="mf">0.3</span>
@@ -1666,7 +1666,7 @@ cH0Glyr = cH0mpc * 3.262 / 1000 #c/H0 in billions of light years.  There are 3.2
 <span class="n">om</span><span class="p">,</span> <span class="n">ol</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span>
 
 <span class="c1"># Calcuate the integral (just the int_0^z(dz/E(z)) part, which givers xx=R0*X/(c/H_0)):</span>
-<span class="n">xx</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">Ez</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">om</span><span class="p">,</span><span class="n">ol</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> 
+<span class="n">xx</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">quad</span><span class="p">(</span><span class="n">Ezinv</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">z</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">om</span><span class="p">,</span><span class="n">ol</span><span class="p">))[</span><span class="mi">0</span><span class="p">]</span> 
 
 <span class="c1"># Sub in the required constants to get the comoving distance R_0*X</span>
 <span class="n">R0X</span> <span class="o">=</span> <span class="n">xx</span><span class="o">*</span><span class="n">cH0Glyr</span> <span class="c1"># Distance in Glyr</span>
@@ -1674,10 +1674,10 @@ cH0Glyr = cH0mpc * 3.262 / 1000 #c/H0 in billions of light years.  There are 3.2
 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Comoving distance to a galaxy at z=</span><span class="si">%.3f</span><span class="s1"> is </span><span class="si">%.2f</span><span class="s1"> Glyr (this is not right until you have put the correct equation for Ez above)&#39;</span><span class="o">%</span><span class="p">(</span><span class="n">z</span><span class="p">,</span><span class="n">R0X</span><span class="p">))</span>
 </pre></div>
 <div id="cell-2" class="clipboard-copy-txt"># Write a function for the integrand, i.e. $1/E(z)$,
-def Ez(z, om, ol):
+def Ezinv(z, om, ol):
     ok = 1.0-om-ol
     Ez = np.sqrt(0.0) # Put your code here!  This is not right until you change it.
-    return Ez
+    return 1.0/Ez
 
 # Choose the redshift (e.g. z=0.3)
 z=0.3
@@ -1686,7 +1686,7 @@ z=0.3
 om, ol = 0.3, 0.7
 
 # Calcuate the integral (just the int_0^z(dz/E(z)) part, which givers xx=R0*X/(c/H_0)):
-xx = integrate.quad(Ez,0,z,args=(om,ol))[0] 
+xx = integrate.quad(Ezinv,0,z,args=(om,ol))[0] 
 
 # Sub in the required constants to get the comoving distance R_0*X
 R0X = xx*cH0Glyr # Distance in Glyr
