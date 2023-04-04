@@ -1,7 +1,7 @@
 site_name: UQ PHYS3080/7080 Cosmology Project
 nav:
     - Home: index.md
-    - Instructions (download): CosmologyProject_2022.pdf
+    - Instructions (download): CosmologyProject.pdf
     - Theory (download): TheoryCosmo.pdf
     #- Statistics (download): StatisticsNotes.pdf
     - Code to get you started:
@@ -22,7 +22,7 @@ nav:
 
 theme:
   name: "material"
-repo_url: https://github.com/AstroUQ/PHYS3080_2022
+repo_url: https://github.com/AstroUQ/PHYS3080
 plugins:
   - search
   - mkdocs-jupyter
