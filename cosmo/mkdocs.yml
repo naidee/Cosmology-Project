@@ -3,7 +3,7 @@ nav:
     - Home: index.md
     - Instructions (download): CosmologyProject.pdf
     - Theory (download): TheoryCosmo.pdf
-    #- Statistics (download): StatisticsNotes.pdf
+    - Statistics (download): StatisticsNotes.pdf
     - Code to get you started:
       - Basic cosmology: notebooks/CosmoIntro.ipynb
       - Calculating distances: notebooks/Distances.ipynb
@@ -16,9 +16,6 @@ nav:
       - Data2: notebooks/data/Data2.txt
       - Data3: notebooks/data/Data3.txt
       - Data4: notebooks/data/Data4.txt
-      - Data5: notebooks/data/Data5.txt
-      - Data6: notebooks/data/Data6.txt
-      - Data7: notebooks/data/Data7.txt
 
 theme:
   name: "material"
