@@ -9,6 +9,7 @@ nav:
       - Calculating distances: notebooks/Distances.ipynb
       - Fitting supernova data: notebooks/Fit_Models.ipynb
       - (How we generated mock data): notebooks/Make_Mock_Data.ipynb
+      - Interesting tidbits: notebooks/InterestingTidbits.ipynb
     - Data:
       - Data00: notebooks/data/Data00.txt
       - Data0: notebooks/data/Data0.txt
