@@ -17,6 +17,7 @@ nav:
       - Data2: notebooks/data/Data2.txt
       - Data3: notebooks/data/Data3.txt
       - Data4: notebooks/data/Data4.txt
+      - DataReal: notebooks/data/JLA_Betoule2014.txt
 
 theme:
   name: "material"
