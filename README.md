@@ -1,2 +1,2 @@
 # PHYS3080
-Public code and documentation for students doing PHYS3080 and PHYS7080 at UQ.
+cosmology graphs and write up can be accessed here: https://docs.google.com/document/d/1GdmbsdmTqPmA7cFpRPS6g4_HRztxXZZASelTKyQ0fNY/edit
